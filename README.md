@@ -1,7 +1,7 @@
 
-# Walter Chao Portfolio
+# Walter Chao Portfolio Responsive
 
-Portfolio profesional con enfoque en optimización operativa y comercial para PyMEs.
+Versión responsive optimizada para desktop, tablet y mobile.
 
 ## Ejecutar local
 npm install
