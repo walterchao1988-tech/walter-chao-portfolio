@@ -1,0 +1,40 @@
+import React from 'react';
+import { createRoot } from 'react-dom/client';
+import { motion } from 'framer-motion';
+import { ArrowRight, Boxes, ChartNoAxesCombined, CheckCircle2, ExternalLink, MapPinned, MessageCircle, QrCode, Rocket, ShieldCheck, Smartphone, Workflow, Zap } from 'lucide-react';
+import './styles.css';
+
+const WHATSAPP_URL = 'https://wa.me/5493541225990';
+const LINKEDIN_URL = 'https://www.linkedin.com/in/walter-chao88/';
+
+const services = [
+  { icon: MessageCircle, title: 'Automatización WhatsApp', text: 'Inbox operativo, mensajes automáticos, plantillas, seguimiento de clientes y flujos comerciales conectados a la operación real.' },
+  { icon: Smartphone, title: 'Sistemas operativos / POS', text: 'POS personalizados, ventas, medios de pago, cuentas corrientes, fidelización, stock y reportes en una sola plataforma.' },
+  { icon: MapPinned, title: 'Logística y reparto', text: 'Planificación de rutas, control de entregas, stock móvil, trazabilidad QR y herramientas para equipos en campo.' },
+  { icon: Workflow, title: 'Automatización comercial', text: 'Promociones, puntos, beneficios, recordatorios, reportes y procesos automatizados para mejorar ventas y operación.' },
+];
+
+const projects = [
+  {
+    name: 'C&M Turismo', label: 'Plataforma operativa para turismo mayorista',
+    problem: 'Gestión compleja de paquetes de viaje, fechas de salida, alojamientos, operadores, cobros y pagos dentro de un entorno WooCommerce.',
+    solution: ['Panel de carga masiva de variaciones de paquetes turísticos.', 'Selector dinámico de fechas y opciones de viaje en frontend.', 'Gestor de cobranzas con emisión automática de recibos por email.', 'Panel de saldos a cobrar y pagos a proveedores.'],
+    tags: ['WooCommerce','PHP','JS','UX/UI','Automatización'],
+    images: ['/assets/turismo-carga-masiva.png','/assets/turismo-selector-fecha.png','/assets/turismo-opciones-paquetes.png','/assets/turismo-variacion.png','/assets/turismo-balance.png']
+  },
+  {
+    name: 'Aqua Natura', label: 'Ecosistema operativo para distribución y reparto',
+    problem: 'Necesidad de centralizar ventas, reparto, stock de bidones, clientes, puntos, cuentas corrientes, WhatsApp y reportes operativos.',
+    solution: ['POS con clientes, beneficios por puntos, cuenta corriente y medios de pago.', 'Stock QR de bidones en planta, camioneta y clientes.', 'Inbox WhatsApp y automatizaciones para reparto y atención.', 'Módulos de reportes, planificación, fidelización y operación diaria.'],
+    tags: ['POS','WhatsApp API','QR','Google Maps','Reportes'],
+    images: ['/assets/aqua-pos-front.png','/assets/aqua-modulos-1.png','/assets/aqua-modulos-2.png','/assets/aqua-reportes.png','/assets/aqua-stock-bidones.png','/assets/aqua-inbox-whatsapp.png','/assets/aqua-automatizaciones.png']
+  }
+];
+const stack = ['WordPress','WooCommerce','PHP','JavaScript','WhatsApp API','Meta','Google Maps','QR','Automatización','Reportes','UX/UI'];
+function Badge({children}){return <span className="badge">{children}</span>}
+function ButtonLink({href, children, secondary}){return <a className={secondary?'btn secondary':'btn'} href={href} target={href.startsWith('http')?'_blank':undefined} rel="noreferrer">{children}</a>}
+function SectionTitle({eyebrow,title,description}){return <div className="section-title"><p>{eyebrow}</p><h2>{title}</h2>{description&&<span>{description}</span>}</div>}
+function Project({project,index}){return <article className="project-card"><div className="project-media"><div className="media-head"><div className="iconbox">{index===0?<Boxes/>:<QrCode/>}</div><div><small>{project.name}</small><h3>{project.label}</h3></div></div><p>{project.problem}</p><div className="screens-grid">{project.images.map((src,i)=><img key={src} src={src} alt={`${project.name} screenshot ${i+1}`} />)}</div></div><div className="project-info"><strong>Solución implementada</strong>{project.solution.map(item=><div className="solution" key={item}><CheckCircle2/><span>{item}</span></div>)}<div className="tags">{project.tags.map(t=><Badge key={t}>{t}</Badge>)}</div></div></article>}
+function App(){return <main><div className="glow one"></div><div className="glow two"></div><header><div className="brand"><div className="brand-icon"><Zap/></div><div><b>Walter Chao</b><small>Automation & Operations</small></div></div><nav><a href="#servicios">Servicios</a><a href="#proyectos">Proyectos</a><a href="#stack">Stack</a><a href="#contacto">Contacto</a></nav></header><section className="hero"><motion.div initial={{opacity:0,y:24}} animate={{opacity:1,y:0}} transition={{duration:.6}}><Badge>Automatización comercial · Sistemas operativos · Logística</Badge><h1>Transformo operaciones manuales en sistemas escalables.</h1><p>Desarrollo plataformas y automatizaciones para PyMEs que integran ventas, logística, WhatsApp, POS, reportes y procesos comerciales reales.</p><div className="actions"><ButtonLink href={WHATSAPP_URL}>Contactar por WhatsApp <ArrowRight size={18}/></ButtonLink><ButtonLink href="#proyectos" secondary>Ver proyectos</ButtonLink></div><div className="metrics"><div><b>POS</b><span>Ventas y operación</span></div><div><b>QR</b><span>Trazabilidad</span></div><div><b>WA</b><span>Automatización</span></div></div></motion.div><motion.div className="portrait-card" initial={{opacity:0,scale:.96}} animate={{opacity:1,scale:1}} transition={{duration:.6,delay:.1}}><img src="/assets/walter-chao-professional.png" alt="Walter Chao"/><div><Rocket/><strong>Consultor independiente</strong><span>Automatización comercial y sistemas operativos para PyMEs</span></div></motion.div></section><section id="servicios"><SectionTitle eyebrow="Servicios" title="Soluciones para operar, vender y escalar mejor" description="El foco está en sistemas reales para negocios reales: menos tareas manuales, más control operativo y mejor experiencia para clientes y equipos."/><div className="services">{services.map(s=><div className="service" key={s.title}><div className="iconbox"><s.icon/></div><h3>{s.title}</h3><p>{s.text}</p></div>)}</div></section><section id="proyectos"><SectionTitle eyebrow="Casos de estudio" title="Proyectos reales con operación compleja" description="Cada proyecto fue diseñado desde una necesidad concreta del negocio, combinando tecnología, UX y procesos operativos."/>{projects.map((p,i)=><Project key={p.name} project={p} index={i}/>)}</section><section id="stack"><SectionTitle eyebrow="Stack" title="Tecnología aplicada a procesos comerciales" description="Herramientas utilizadas para construir plataformas, automatizaciones, dashboards e integraciones operativas."/><div className="stack">{stack.map(s=><span key={s}>{s}</span>)}</div></section><section className="about"><div className="about-badge"><ShieldCheck/><b>Walter Chao</b><span>Consultor independiente</span></div><div><small>Sobre mí</small><h2>Diseño sistemas desde la operación real del negocio.</h2><p>Trabajo en la intersección entre tecnología, procesos comerciales y experiencia operativa. Mi enfoque es entender cómo funciona el negocio en la práctica y convertir tareas manuales, repetitivas o desordenadas en plataformas simples, útiles y escalables.</p><p>Desarrollo soluciones personalizadas para PyMEs que necesitan vender, cobrar, repartir, fidelizar, comunicar y medir mejor su operación diaria.</p></div></section><section id="contacto" className="contact"><small>Contacto</small><h2>¿Tenés una operación que necesita orden, automatización o escala?</h2><p>Podemos convertirla en un sistema claro, medible y preparado para crecer.</p><div className="actions center"><ButtonLink href={WHATSAPP_URL}>Escribirme por WhatsApp <ArrowRight size={18}/></ButtonLink><ButtonLink href={LINKEDIN_URL} secondary>Ver LinkedIn <ExternalLink size={18}/></ButtonLink></div></section><footer>© {new Date().getFullYear()} Walter Chao · Automatización comercial y sistemas operativos para PyMEs.</footer></main>}
+
+createRoot(document.getElementById('root')).render(<App/>);
